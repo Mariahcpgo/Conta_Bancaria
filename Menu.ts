@@ -2,9 +2,19 @@ import leia = require('readline-sync')
 import { colors } from './Src/Util/Colors';
 import { Conta } from './Src/Model/Conta';
 
+
 export function main() {
 
 let opcao: number;
+
+let c1: Conta = new Conta(1, 123, 1, "Mariah Caroline", 10000);
+c1.visualizar();
+
+c1.sacar(15000);
+c1.visualizar();
+
+c1.depositar(5000);
+c1.visualizar();
 
 while(true) {
  
