@@ -16,6 +16,7 @@ c1.visualizar();
 c1.depositar(5000);
 c1.visualizar();
 
+
 while(true) {
  
     console.log(colors.bg.black, colors.fg.bluestrong, "*****************************************");
