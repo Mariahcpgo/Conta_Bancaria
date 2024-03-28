@@ -2,27 +2,26 @@ import leia = require('readline-sync')
 import { colors } from './Src/Util/Colors';
 import { Conta } from './Src/Model/Conta';
 import { ContaPoupanca } from './Src/Model/ContaPoupanca';
+import { ContaCorrente } from './Src/Model/ContaCorrente';
 
 
 export function main() {
 
 let opcao: number;
 
-let c1: Conta = new Conta(1, 123, 1, "Mariah Caroline", 10000);
-c1.visualizar();
+const CCorrente: ContaCorrente = new ContaCorrente(1, 123, 1, "Mariah Caroline", 10000, 5000)
+CCorrente.visualizar();
+CCorrente.sacar(15000);
+CCorrente.visualizar();
+CCorrente.depositar(5000);
+CCorrente.visualizar();
 
-c1.sacar(15000);
-c1.visualizar();
-
-c1.depositar(5000);
-c1.visualizar();
-
-let c2: ContaPoupanca = new ContaPoupanca(1, 123, 2, "Mariah Caroline", 5000, 0, 10)
-c2.visualizar();
-c2.sacar(200);
-c2.visualizar();
-c2.depositar(1000);
-c2.visualizar();
+const CPoupanca: ContaPoupanca = new ContaPoupanca(1, 123, 2, "Mariah Caroline", 5000, 0, 10)
+CPoupanca.visualizar();
+CPoupanca.sacar(200);
+CPoupanca.visualizar();
+CPoupanca.depositar(1000);
+CPoupanca.visualizar()
 
 
 while(true) {
