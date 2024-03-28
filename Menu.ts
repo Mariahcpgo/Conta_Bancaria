@@ -3,13 +3,19 @@ import { colors } from './Src/Util/Colors';
 import { Conta } from './Src/Model/Conta';
 import { ContaPoupanca } from './Src/Model/ContaPoupanca';
 import { ContaCorrente } from './Src/Model/ContaCorrente';
+import { ContaController } from './Src/Controller/ContaController';
 
 
 export function main() {
 
 let opcao: number;
 
-const CCorrente: ContaCorrente = new ContaCorrente(1, 123, 1, "Mariah Caroline", 10000, 5000)
+let contas: ContaController = new ContaController();
+
+let cc1: ContaCorrente = new ContaCorrente(1, 123, 1, "Mariah Caroline", 10000, 5000);
+contas.cadastrar(cc1);
+
+const CCorrente: ContaCorrente = new ContaCorrente(1, 123, 1, "Mariah Caroline", 10000, 5000);
 CCorrente.visualizar();
 CCorrente.sacar(15000);
 CCorrente.visualizar();
@@ -62,6 +68,8 @@ while(true) {
         
       case 2:
         console.log("\n\nListar todas as contas\n\n");
+        contas.listarTodas();
+        
         break;
         
       case 3:
