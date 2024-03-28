@@ -5,20 +5,22 @@ export class ContaPoupanca extends Conta{
     private _aniversario: number;
 
 
-	constructor(aniversario: number, numero: number, agencia: number, tipo: number, titular: string, saldo: number, limite: number) {
+	constructor(numero: number, agencia: number, tipo: number, titular: string, saldo: number, limite: number, aniversario: number) {
         super(numero, agencia, tipo, titular, saldo)
 		this._aniversario = aniversario;
-
 	}
 
-    public aniversario(_aniversario: number) {
+    public get aniversario() {
         return this._aniversario;
+    }
+
+    public set aniversario(aniversario: number) {
+        this._aniversario = aniversario;
     }
 
     public visualizar(): void {
         super.visualizar();
-        console.log("Dia do aniversario: " + this._aniversario)
-        
+        console.log("Dia do aniversário: " + this._aniversario);
     }
 
 }
