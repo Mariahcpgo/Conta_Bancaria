@@ -32,11 +32,12 @@ CPoupanca.visualizar()
 
 while(true) {
  
-    console.log(colors.bg.black, colors.fg.bluestrong, "*****************************************");
+    console.log(colors.bg.black, colors.fg.bluestrong, "                                  ");
+    console.log("*****************************************");
     console.log("                                         ");
     console.log("       BANCO DO BRAZIL COM Z             ");
     console.log("                                         ");
-    console.log("  *****************************************");
+    console.log("*****************************************");
     console.log("                                         ");
     console.log("    1. Criar conta                       ");
     console.log("    2. Listar todas as contas            ");
@@ -48,7 +49,7 @@ while(true) {
     console.log("    8. Transferir valores entre contas   ");
     console.log("    9. Sair                              ");
     console.log("                                         ");
-    console.log("  *****************************************");
+    console.log("*****************************************");
     console.log("                                         ", 
     colors.reset);
 
@@ -64,39 +65,47 @@ while(true) {
     switch (opcao) {
       case 1:
         console.log("\n\nCriar conta\n\n");
+        keyPress();
         break;
         
       case 2:
         console.log("\n\nListar todas as contas\n\n");
         contas.listarTodas();
-        
+        keyPress();
         break;
         
       case 3:
         console.log("\n\nConsultar dados da conta - Por numero\n\n");
+        keyPress();
         break;
 
       case 4:
         console.log("\n\nAtualizar dados da conta\n\n");
+        keyPress();
         break;
 
       case 5:
         console.log("\n\nApagar uma conta\n\n");
+        keyPress();
         break;
 
       case 6:
         console.log("\n\nSaque\n\n");
+        keyPress();
         break;
 
       case 7:
         console.log("\n\nDeposito\n\n");
+        keyPress();
         break;
 
       case 8:
         console.log("\n\nTransferir valores entre contas \n\n");
+        keyPress();
         break;
         default:
             console.log("\nOpcao invalida!\n");
+            keyPress();
             break;
 
     }
@@ -108,6 +117,12 @@ export function about(): void {
     console.log("\nGeneration Brasil - generation@generation.org");
     console.log("\ngithub.com/conta_bancaria");
     console.log("\n*********************************************", colors.reset);
+}
+
+function keyPress(): void {
+  console.log(colors.reset, "");
+  console.log("\nPressione enter para continuar...");
+  leia.prompt();
 }
 
 main();
