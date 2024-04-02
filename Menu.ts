@@ -8,7 +8,7 @@ import { ContaController } from './Src/Controller/ContaController';
 
 export function main() {
 
-let opcao, numero, agencia, tipo, saldo, limite, aniversario: number;
+let opcao, numero, agencia, tipo, saldo, limite, aniversario, valor, numeroDestino: number;
 let titular: string;
 
 const tipoContas = ['Conta Corrente', 'Conta Poupança'];
@@ -39,7 +39,8 @@ while(true) {
     console.log("    6. Sacar                             ");
     console.log("    7. Depositar                         ");
     console.log("    8. Transferir valores entre contas   ");
-    console.log("    9. Sair                              ");
+    console.log("    9. Buscar Conta por Titular          ");
+    console.log("    0. Sair                              ");
     console.log("                                         ");
     console.log("*****************************************");
     console.log("                                         ", 
@@ -48,7 +49,7 @@ while(true) {
     console.log("Entre com a opcao desejada: ");
     opcao = leia.questionInt("");
 
-    if(opcao == 9) {
+    if(opcao == 0) {
         console.log("\nBanco do Brazil com Z - O seu futuro comeca aqui!");
         about();
         process.exit(0);
@@ -105,7 +106,8 @@ while(true) {
 
       case 4:
         console.log("\n\nAtualizar dados da conta\n\n");
-        console.log("Digite o Número da Conta: ")
+
+        console.log("Digite o Número da Conta: ");
         numero = leia.questionInt("")
 
         let conta = contas.buscarNoArray(numero)
@@ -145,6 +147,7 @@ while(true) {
 
       case 5:
         console.log("\n\nApagar uma conta\n\n");
+
         console.log("Digite o Número da Conta: ")
         numero = leia.questionInt("")
 
@@ -155,18 +158,60 @@ while(true) {
 
       case 6:
         console.log("\n\nSaque\n\n");
+
+        console.log("Digite o Numero da Conta: ")
+        numero = leia.questionInt("")
+
+        console.log("Digite o Valor do Saque: ")
+        valor = leia.questionFloat("")
+
+        contas.sacar(numero, valor);
+
         keyPress();
         break;
 
       case 7:
         console.log("\n\nDeposito\n\n");
+
+        console.log("Digite o Numero da Conta: ")
+        numero = leia.questionInt("")
+
+        console.log("Digite o Valor do Deposito: ")
+        valor = leia.questionFloat("")
+
+        contas.depositar(numero, valor);
+
         keyPress();
         break;
 
       case 8:
         console.log("\n\nTransferir valores entre contas \n\n");
+        
+        console.log("Digite o Numero da Conta de Origem: ")
+        numero = leia.questionInt("")
+
+        console.log("Digite o Numero da Conta Destino: ")
+        numeroDestino = leia.questionInt("")
+
+        console.log("Digite o Valor do Deposito: ")
+        valor = leia.questionFloat("")
+
+        contas.transferir(numero, numeroDestino, valor);
+        
         keyPress();
         break;
+
+      case 9:
+        console.log("\n\nConsultar conta por titular\n\n");
+
+        console.log("Digite o Nome do Titular: ")
+        titular = leia.question("")
+
+        contas.procurarPorTitular(titular);
+
+        keyPress();
+        break;
+
         default:
             console.log("\nOpcao invalida!\n");
             keyPress();
