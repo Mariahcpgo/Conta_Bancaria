@@ -8,26 +8,18 @@ import { ContaController } from './Src/Controller/ContaController';
 
 export function main() {
 
-let opcao: number;
+let opcao, numero, agencia, tipo, saldo, limite, aniversario: number;
+let titular: string;
 
-let contas: ContaController = new ContaController();
+const tipoContas = ['Conta Corrente', 'Conta Poupança'];
 
-let cc1: ContaCorrente = new ContaCorrente(1, 123, 1, "Mariah Caroline", 10000, 5000);
-contas.cadastrar(cc1);
+const contas: ContaController = new ContaController();
 
-const CCorrente: ContaCorrente = new ContaCorrente(1, 123, 1, "Mariah Caroline", 10000, 5000);
-CCorrente.visualizar();
-CCorrente.sacar(15000);
-CCorrente.visualizar();
-CCorrente.depositar(5000);
-CCorrente.visualizar();
+const CCorrente: ContaCorrente = new ContaCorrente(contas.gerarNumero(), 1, 123, "Mariah Garcia", 10000, 5000);
+contas.cadastrar(CCorrente);
 
-const CPoupanca: ContaPoupanca = new ContaPoupanca(1, 123, 2, "Mariah Caroline", 5000, 0, 10)
-CPoupanca.visualizar();
-CPoupanca.sacar(200);
-CPoupanca.visualizar();
-CPoupanca.depositar(1000);
-CPoupanca.visualizar()
+const CPoupanca: ContaPoupanca = new ContaPoupanca(contas.gerarNumero(), 1, 123, "Caroline Oliveira", 5000, 10)
+contas.cadastrar(CPoupanca);
 
 
 while(true) {
@@ -65,8 +57,38 @@ while(true) {
     switch (opcao) {
       case 1:
         console.log("\n\nCriar conta\n\n");
-        keyPress();
-        break;
+
+        console.log("Digite o numero da agencia: ")
+        agencia = leia.questionInt("")
+        
+        console.log("Digite o Nome do Titular: ")
+        titular = leia.question("")
+
+        console.log("Informe o tipo da Conta: ")
+        tipo = leia.keyInSelect(tipoContas, "", { cancel: false }) + 1
+
+        console.log("Digite o Saldo da Conta: ")
+        saldo = leia.questionFloat("")
+
+        switch (tipo) {
+          case 1:
+              console.log("Digite o Limite da Conta: ")
+              limite = leia.questionFloat("")
+              contas.cadastrar(
+                  new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite)
+              )
+              break;
+          case 2:
+              console.log("Digite o dia do aniversário da Conta: ")
+              aniversario = leia.questionInt("")
+              contas.cadastrar(
+                  new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario)
+              )
+              break;
+      }
+
+      keyPress()
+      break;
         
       case 2:
         console.log("\n\nListar todas as contas\n\n");
@@ -76,18 +98,60 @@ while(true) {
         
       case 3:
         console.log("\n\nConsultar dados da conta - Por numero\n\n");
+        numero = leia.questionInt("")
+        contas.procurarPorNumero(numero);
         keyPress();
         break;
 
       case 4:
         console.log("\n\nAtualizar dados da conta\n\n");
-        keyPress();
-        break;
+        console.log("Digite o Número da Conta: ")
+        numero = leia.questionInt("")
+
+        let conta = contas.buscarNoArray(numero)
+
+        if (conta !== null) {
+          console.log("Digite o Número da Agência: ")
+          agencia = leia.questionInt("")
+          
+          console.log("Digite o Nome do Titular: ")
+          titular = leia.question("")
+
+          tipo = conta.tipo
+
+          console.log("Digite o Saldo da Conta: ")
+          saldo = leia.questionFloat("")
+          
+          switch (tipo) {
+            case 1:
+              console.log("Digite o Limite da Conta: ")
+              limite = leia.questionFloat("")
+              contas.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite))
+              break;
+              
+            case 2:
+              console.log("Digite o dia do aniversário da Conta: ")
+              aniversario = leia.questionInt("")
+              contas.atualizar(new ContaPoupanca(numero, agencia, tipo, titular, saldo, aniversario))
+              break;
+                    }
+
+        }else {
+            console.log("A Conta não foi Encontrada!")
+        }
+
+      keyPress()
+      break;
 
       case 5:
         console.log("\n\nApagar uma conta\n\n");
-        keyPress();
-        break;
+        console.log("Digite o Número da Conta: ")
+        numero = leia.questionInt("")
+
+        contas.deletar(numero);
+
+      keyPress()
+      break;
 
       case 6:
         console.log("\n\nSaque\n\n");
